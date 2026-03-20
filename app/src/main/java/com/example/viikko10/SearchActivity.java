@@ -1,10 +1,12 @@
 package com.example.viikko10;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ public class SearchActivity extends AppCompatActivity {
     private EditText yearInput;
     private Button searchInfo;
     private Button listInfo;
+    private TextView statusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
         yearInput = findViewById(R.id.YearEdit);
         searchInfo = findViewById(R.id.SearchButton);
         listInfo = findViewById(R.id.ListInfoActivityButton);
+        statusText = findViewById(R.id.StatusText);
     }
 
     public void switchToListInfo(View view) {

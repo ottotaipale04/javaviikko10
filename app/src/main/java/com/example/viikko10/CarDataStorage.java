@@ -29,7 +29,7 @@ public class CarDataStorage {
     }
 
     public void clearData() {
-
+        carData.clear();
     }
 
     public String getCity() {
