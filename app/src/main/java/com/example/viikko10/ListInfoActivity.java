@@ -41,8 +41,10 @@ public class ListInfoActivity extends AppCompatActivity {
             sb.append(car.getType()).append(": ").append(car.getAmount()).append("\n");
             totalSum += car.getAmount();
         }
-        sb.append("\nKokonaismäärä: ").append(totalSum);
+        sb.append("\nYhteensä: ").append(totalSum);
 
         carInfoText.setText(sb.toString());
     }
+
+
 }
