@@ -69,12 +69,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void getData(Context context, String city, int year) {
-
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode areas = null;
 
         try {
-
             areas = objectMapper.readTree(new URL("https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/mkan/statfin_mkan_pxt_11ic.px"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,6 +98,12 @@ public class SearchActivity extends AppCompatActivity {
         String code = municipalityCodes.get(city);
 
         if (code == null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    statusText.setText("Haku epäonnistui, kaupunki tai vuosi on väärin.");
+                }
+            });
             return;
         }
 
@@ -150,6 +154,12 @@ public class SearchActivity extends AppCompatActivity {
                 storage.addCarData(new CarData(carTypes.get(i), carAmounts.get(i)));
             }
 
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    statusText.setText("Haku onnistui");
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,8 +175,10 @@ public class SearchActivity extends AppCompatActivity {
 
         try {
             int year = Integer.parseInt(yearString);
-
             ExecutorService service = Executors.newSingleThreadExecutor();
+
+            statusText.setText("Haetaan");
+
             service.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -175,6 +187,7 @@ public class SearchActivity extends AppCompatActivity {
             });
 
         } catch (NumberFormatException e) {
+
         }
     }
 }
