@@ -1,9 +1,11 @@
 package com.example.viikko10;
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,134 +69,112 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void getData(Context context, String city, int year) {
-        // Android vaatii, että verkkokutsut tehdään taustasäikeessä
-        new Thread(() -> {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode areas = null;
 
-            try {
-                // 1. Haetaan alueiden koodit ajoneuvotilaston osoitteesta
-                areas = objectMapper.readTree(new URL("https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/mkan/statfin_mkan_pxt_11ic.px"));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode areas = null;
+
+        try {
+
+            areas = objectMapper.readTree(new URL("https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/mkan/statfin_mkan_pxt_11ic.px"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ArrayList<String> keys = new ArrayList<>();
+        ArrayList<String> values = new ArrayList<>();
+
+        for (JsonNode node : areas.get("variables").get(0).get("values")) {
+            values.add(node.asText());
+        }
+        for (JsonNode node : areas.get("variables").get(0).get("valueTexts")) {
+            keys.add(node.asText());
+        }
+
+        HashMap<String, String> municipalityCodes = new HashMap<>();
+
+        for(int i = 0; i < keys.size(); i++) {
+            municipalityCodes.put(keys.get(i), values.get(i));
+        }
+
+        String code = municipalityCodes.get(city);
+
+        if (code == null) {
+            return;
+        }
+
+        try {
+            URL url = new URL("https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/mkan/statfin_mkan_pxt_11ic.px");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+
+            JsonNode jsonInputString = objectMapper.readTree(context.getResources().openRawResource(R.raw.query));
+
+            ((ObjectNode) jsonInputString.get("query").get(0).get("selection")).putArray("values").removeAll().add(code);
+
+            ((ObjectNode) jsonInputString.get("query").get(3).get("selection")).putArray("values").removeAll().add(String.valueOf(year));
+
+            byte[] input = objectMapper.writeValueAsBytes(jsonInputString);
+            OutputStream os = con.getOutputStream();
+            os.write(input, 0, input.length);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+            StringBuilder response = new StringBuilder();
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                response.append(line.trim());
             }
 
-            ArrayList<String> keys = new ArrayList<>();
-            ArrayList<String> values = new ArrayList<>();
+            JsonNode municipalityData = objectMapper.readTree(response.toString());
 
-            // Sinun datassasi "Alue" on indeksissä 0
-            for (JsonNode node : areas.get("variables").get(0).get("values")) {
-                values.add(node.asText());
-            }
-            for (JsonNode node : areas.get("variables").get(0).get("valueTexts")) {
-                keys.add(node.asText());
+            ArrayList<String> carTypes = new ArrayList<>();
+            ArrayList<Integer> carAmounts = new ArrayList<>();
+
+            for (JsonNode node : municipalityData.get("dimension").get("Ajoneuvoluokka").get("category").get("label")) {
+                carTypes.add(node.asText());
             }
 
-            HashMap<String, String> municipalityCodes = new HashMap<>();
-
-            for(int i = 0; i < keys.size(); i++) {
-                municipalityCodes.put(keys.get(i), values.get(i));
+            for (JsonNode node : municipalityData.get("value")) {
+                carAmounts.add(node.asInt());
             }
 
-            String code = null;
-            code = municipalityCodes.get(city);
+            CarDataStorage storage = CarDataStorage.getInstance();
+            storage.clearData();
+            storage.setCity(city);
+            storage.setYear(year);
 
-            // Jos kaupunkia ei löydy listasta, lopetetaan haku
-            if (code == null) {
-                return;
+            for(int i = 0; i < carTypes.size(); i++) {
+                storage.addCarData(new CarData(carTypes.get(i), carAmounts.get(i)));
             }
 
-            try {
-                URL url = new URL("https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/mkan/statfin_mkan_pxt_11ic.px");
-
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("POST");
-                con.setRequestProperty("Content-Type", "application/json; utf-8");
-                con.setRequestProperty("Accept", "application/json");
-                con.setDoOutput(true);
-
-                // Haetaan JSON-pohja res/raw -kansiosta (oletetaan että sen nimi on query.json)
-                JsonNode jsonInputString = objectMapper.readTree(context.getResources().openRawResource(R.raw.query));
-
-                // Asetetaan kaupunkikoodi kyselyyn (Alue on kyselyssä indeksissä 0)
-                // Käytetään removeAll(), jotta poistetaan EsimerkkiHaku.jsonin oletusarvo "KU049" alta pois
-                ((ObjectNode) jsonInputString.get("query").get(0).get("selection")).putArray("values").removeAll().add(code);
-
-                // Asetetaan vuosi kyselyyn (Vuosi on kyselyssä indeksissä 3)
-                ((ObjectNode) jsonInputString.get("query").get(3).get("selection")).putArray("values").removeAll().add(String.valueOf(year));
-
-                byte[] input = objectMapper.writeValueAsBytes(jsonInputString);
-                OutputStream os = con.getOutputStream();
-                os.write(input, 0, input.length);
-
-                BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
-                StringBuilder response = new StringBuilder();
-                String line = null;
-                while ((line = br.readLine()) != null) {
-                    response.append(line.trim());
-                }
-
-                JsonNode municipalityData = objectMapper.readTree(response.toString());
-
-                ArrayList<String> carTypes = new ArrayList<>();
-                ArrayList<Integer> carAmounts = new ArrayList<>();
-
-                // Haetaan ajoneuvoluokkien nimet (esim. Henkilöautot, Pakettiautot)
-                for (JsonNode node : municipalityData.get("dimension").get("Ajoneuvoluokka").get("category").get("label")) {
-                    carTypes.add(node.asText());
-                }
-
-                // Haetaan ajoneuvojen lukumäärät
-                for (JsonNode node : municipalityData.get("value")) {
-                    carAmounts.add(node.asInt());
-                }
-
-                // ---- TALLENNUS OMAAN RAKENTEESEESI ----
-                CarDataStorage storage = CarDataStorage.getInstance();
-                storage.clearData();     // Tyhjennetään vanhan haun tiedot
-                storage.setCity(city);   // Asetetaan uusi kaupunki
-                storage.setYear(year);   // Asetetaan uusi vuosi
-
-                // Luodaan CarData-oliot ja lisätään ne varastoon
-                for(int i = 0; i < carTypes.size(); i++) {
-                    storage.addCarData(new CarData(carTypes.get(i), carAmounts.get(i)));
-                }
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onClickSearch(View view) {
         String cityString = cityName.getText().toString().trim();
         String yearString = yearInput.getText().toString().trim();
 
-        ExecutorService service = Executors.newSingleThreadExecutor();
+        if (cityString.isEmpty()) {
+            return;
+        }
 
-        service.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (cityString.isEmpty()) {
-                    return;
-                }
+        try {
+            int year = Integer.parseInt(yearString);
 
-                try {
-                    int year = Integer.parseInt(yearString);
-
+            ExecutorService service = Executors.newSingleThreadExecutor();
+            service.execute(new Runnable() {
+                @Override
+                public void run() {
                     getData(SearchActivity.this, cityString, year);
-                } catch (NumberFormatException e) {
-
                 }
-            }
-        });
+            });
 
-
-
+        } catch (NumberFormatException e) {
+        }
     }
 }

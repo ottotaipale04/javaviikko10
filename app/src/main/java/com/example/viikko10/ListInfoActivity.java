@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ListInfoActivity extends AppCompatActivity {
 
@@ -32,19 +34,19 @@ public class ListInfoActivity extends AppCompatActivity {
         carInfoText = findViewById(R.id.CarInfoText);
 
         CarDataStorage storage = CarDataStorage.getInstance();
-        ArrayList<CarData> cars = storage.getCarData();
 
-        StringBuilder sb = new StringBuilder();
-        int totalSum = 0;
+        cityText.setText(storage.getCity());
 
-        for (CarData car : cars) {
-            sb.append(car.getType()).append(": ").append(car.getAmount()).append("\n");
-            totalSum += car.getAmount();
+        yearText.setText(String.valueOf(storage.getYear()));
+
+        StringBuilder s = new StringBuilder();
+
+        int total = 0;
+        for (CarData data : storage.getCarData()) {
+            s.append(data.getType()).append(": ").append(data.getAmount()).append("\n");
+            total += data.getAmount();
         }
-        sb.append("\nYhteensä: ").append(totalSum);
-
-        carInfoText.setText(sb.toString());
+        s.append("\n\nYhteensä: " + total);
+        carInfoText.setText(s.toString());
     }
-
-
 }

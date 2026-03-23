@@ -1,1 +1,47 @@
-{"title":"Ajoneuvokanta alueittain (ml. Ahvenanmaa) muuttujina Alue, Ajoneuvoluokka, Liikennekäyttö, Vuosi ja Tiedot","variables":[{"code":"Alue","text":"Alue","values":["SSS","MA1","MK01","KU049","KU091","KU106","KU186","KU224","KU235","KU245","KU257","KU444","KU505","KU543","KU611","KU753","KU755","KU858","KU092","KU927","KU407","KU434","KU018","KU504","KU638","KU616","KU078","KU149","KU710","MK02","KU019","KU284","KU430","KU480","KU561","KU636","KU734","KU761","KU202","KU423","KU481","KU503","KU529","KU538","KU577","KU680","KU704","KU738","KU853","KU304","KU400","KU631","KU833","KU895","KU918","KU322","KU445","MK05","KU061","KU103","KU169","KU834","KU981","KU082","KU109","KU165","KU086","KU433","KU694","MK07","KU016","KU081","KU111","KU098","KU142","KU316","KU398","KU560","KU576","KU781","MK08","KU075","KU285","KU489","KU624","KU935","KU286","MK09","KU153","KU580","KU689","KU700","KU405","KU416","KU441","KU739","KU831","MK04","KU181","KU214","KU230","KU747","KU079","KU102","KU271","KU484","KU531","KU608","KU609","KU886","KU050","KU051","KU684","KU783","MK06","KU020","KU887","KU908","KU619","KU790","KU143","KU250","KU581","KU108","KU211","KU291","KU418","KU536","KU562","KU604","KU635","KU837","KU922","KU980","KU177","KU508","KU702","KU936","MK13","KU172","KU435","KU077","KU179","KU410","KU500","KU592","KU850","KU892","KU182","KU249","KU495","KU216","KU226","KU256","KU265","KU312","KU601","KU729","KU931","KU275","KU992","MK14","KU005","KU052","KU403","KU759","KU934","KU010","KU300","KU989","KU145","KU152","KU233","KU301","KU408","KU743","KU151","KU218","KU232","KU846","MK15","KU288","KU440","KU599","KU598","KU893","KU231","KU287","KU545","KU280","KU399","KU475","KU499","KU905","KU946","MK10","KU097","KU213","KU491","KU507","KU623","KU178","KU593","KU046","KU681","KU740","KU768","MK11","KU204","KU687","KU857","KU297","KU749","KU686","KU778","KU844","KU921","KU171","KU420","KU915","KU140","KU239","KU263","KU402","KU595","KU762","KU925","MK12","KU090","KU146","KU167","KU176","KU276","KU426","KU309","KU607","KU260","KU707","KU848","KU422","KU541","MK16","KU074","KU236","KU421","KU584","KU849","KU924","KU217","KU272","MK17","KU071","KU630","KU791","KU305","KU832","KU069","KU317","KU535","KU626","KU691","KU072","KU244","KU425","KU436","KU494","KU564","KU859","KU139","KU615","KU889","KU785","KU625","KU678","KU748","KU009","KU208","KU483","KU563","KU746","KU977","MK18","KU205","KU578","KU697","KU765","KU105","KU290","KU620","KU777","MK19","KU320","KU583","KU614","KU732","KU742","KU240","KU241","KU751","KU845","KU851","KU148","KU758","KU890","KU683","KU698","KU854","KU976","KU047","KU261","KU273","KU498","MA2","MK21","KU478","KU043","KU060","KU065","KU076","KU170","KU417","KU438","KU736","KU771","KU035","KU062","KU295","KU318","KU766","KU941","MA2X","200","X"],"valueTexts":["KOKO MAA","MA1 MANNER-SUOMI","MK01 Uusimaa","Espoo","Helsinki","Hyvinkää","Järvenpää","Karkkila","Kauniainen","Kerava","Kirkkonummi","Lohja","Mäntsälä","Nurmijärvi","Pornainen","Sipoo","Siuntio","Tuusula","Vantaa","Vihti","Lapinjärvi","Loviisa","Askola","Myrskylä","Porvoo","Pukkila","Hanko","Inkoo","Raasepori","MK02 Varsinais-Suomi","Aura","Koski Tl","Loimaa","Marttila","Oripää","Pöytyä","Salo","Somero","Kaarina","Lieto","Masku","Mynämäki","Naantali","Nousiainen","Paimio","Raisio","Rusko","Sauvo","Turku","Kustavi","Laitila","Pyhäranta","Taivassalo","Uusikaupunki","Vehmaa","Kemiönsaari","Parainen","MK05 Kanta-Häme","Forssa","Humppila","Jokioinen","Tammela","Ypäjä","Hattula","Hämeenlinna","Janakkala","Hausjärvi","Loppi","Riihimäki","MK07 Päijät-Häme","Asikkala","Hartola","Heinola","Hollola","Iitti","Kärkölä","Lahti","Orimattila","Padasjoki","Sysmä","MK08 Kymenlaakso","Hamina","Kotka","Miehikkälä","Pyhtää","Virolahti","Kouvola","MK09 Etelä-Karjala","Imatra","Parikkala","Rautjärvi","Ruokolahti","Lappeenranta","Lemi","Luumäki","Savitaipale","Taipalsaari","MK04 Satakunta","Jämijärvi","Kankaanpää","Karvia","Siikainen","Harjavalta","Huittinen","Kokemäki","Merikarvia","Nakkila","Pomarkku","Pori","Ulvila","Eura","Eurajoki","Rauma","Säkylä","MK06 Pirkanmaa","Akaa","Urjala","Valkeakoski","Punkalaidun","Sastamala","Ikaalinen","Kihniö","Parkano","Hämeenkyrö","Kangasala","Kuhmoinen","Lempäälä","Nokia","Orivesi","Pirkkala","Pälkäne","Tampere","Vesilahti","Ylöjärvi","Juupajoki","Mänttä-Vilppula","Ruovesi","Virrat","MK13 Keski-Suomi","Joutsa","Luhanka","Hankasalmi","Jyväskylä","Laukaa","Muurame","Petäjävesi","Toivakka","Uurainen","Jämsä","Keuruu","Multia","Kannonkoski","Karstula","Kinnula","Kivijärvi","Kyyjärvi","Pihtipudas","Saarijärvi","Viitasaari","Konnevesi","Äänekoski","MK14 Etelä-Pohjanmaa","Alajärvi","Evijärvi","Lappajärvi","Soini","Vimpeli","Alavus","Kuortane","Ähtäri","Ilmajoki","Isokyrö","Kauhava","Kurikka","Lapua","Seinäjoki","Isojoki","Karijoki","Kauhajoki","Teuva","MK15 Pohjanmaa","Kruunupyy","Luoto","Pedersören kunta","Pietarsaari","Uusikaarlepyy","Kaskinen","Kristiinankaupunki","Närpiö","Korsnäs","Laihia","Maalahti","Mustasaari","Vaasa","Vöyri","MK10 Etelä-Savo","Hirvensalmi","Kangasniemi","Mikkeli","Mäntyharju","Puumala","Juva","Pieksämäki","Enonkoski","Rantasalmi","Savonlinna","Sulkava","MK11 Pohjois-Savo","Kaavi","Rautavaara","Tuusniemi","Kuopio","Siilinjärvi","Rautalampi","Suonenjoki","Tervo","Vesanto","Joroinen","Leppävirta","Varkaus","Iisalmi","Keitele","Kiuruvesi","Lapinlahti","Pielavesi","Sonkajärvi","Vieremä","MK12 Pohjois-Karjala","Heinävesi","Ilomantsi","Joensuu","Juuka","Kontiolahti","Liperi","Outokumpu","Polvijärvi","Kitee","Rääkkylä","Tohmajärvi","Lieksa","Nurmes","MK16 Keski-Pohjanmaa","Halsua","Kaustinen","Lestijärvi","Perho","Toholampi","Veteli","Kannus","Kokkola","MK17 Pohjois-Pohjanmaa","Haapavesi","Pyhäntä","Siikalatva","Kuusamo","Taivalkoski","Haapajärvi","Kärsämäki","Nivala","Pyhäjärvi","Reisjärvi","Hailuoto","Kempele","Liminka","Lumijoki","Muhos","Oulu","Tyrnävä","Ii","Pudasjärvi","Utajärvi","Vaala","Pyhäjoki","Raahe","Siikajoki","Alavieska","Kalajoki","Merijärvi","Oulainen","Sievi","Ylivieska","MK18 Kainuu","Kajaani","Paltamo","Ristijärvi","Sotkamo","Hyrynsalmi","Kuhmo","Puolanka","Suomussalmi","MK19 Lappi","Kemijärvi","Pelkosenniemi","Posio","Salla","Savukoski","Kemi","Keminmaa","Simo","Tervola","Tornio","Inari","Sodankylä","Utsjoki","Ranua","Rovaniemi","Pello","Ylitornio","Enontekiö","Kittilä","Kolari","Muonio","MA2 AHVENANMAA-ÅLAND","MK21 Ahvenanmaa","Maarianhamina - Mariehamn","Eckerö","Finström","Geta","Hammarland","Jomala","Lemland","Lumparland","Saltvik","Sund","Brändö","Föglö","Kumlinge","Kökar","Sottunga","Vårdö","MA2X AHVENANMAA, tuntematon","Ulkomaat","Tuntematon"],"elimination":true,"map":"Alue 2021"},{"code":"Ajoneuvoluokka","text":"Ajoneuvoluokka","values":["00","01","02","03","04","05","06","07","08","09","10","11","12","13","15","16","17","YH"],"valueTexts":["Kaikki autot","Henkilöautot","Pakettiautot","Kuorma-autot","Linja-autot","Erikoisautot","Moottoripyörät","Mopot","Moottorikelkat","Traktorit","Moottorityökoneet","Kolmi- tai nelipyörät L5/L5e","Kevyet nelipyörät L6e","Nelipyörät L7e","Matkailuperävaunut","Puoliperävaunut","Muut perävaunut yhteensä","Yhteensä"],"elimination":true},{"code":"Liikennekäyttö","text":"Liikennekäyttö","values":["0","1","2"],"valueTexts":["Liikennekäytössä","Poistettu liikennekäytöstä","Kaikki rekisterissä olevat ajoneuvot"],"elimination":true},{"code":"Vuosi","text":"Vuosi","values":["2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"],"valueTexts":["2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"],"time":true},{"code":"Tiedot","text":"Tiedot","values":["lkm"],"valueTexts":["Lukumäärä"]}]}
+{
+  "query": [
+    {
+      "code": "Alue",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "KU049"
+        ]
+      }
+    },
+    {
+      "code": "Ajoneuvoluokka",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05"
+        ]
+      }
+    },
+    {
+      "code": "Liikennekäyttö",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    {
+      "code": "Vuosi",
+      "selection": {
+        "filter": "item",
+        "values": [
+          "2022"
+        ]
+      }
+    }
+  ],
+  "response": {
+    "format": "json-stat2"
+  }
+}
